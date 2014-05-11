@@ -5,7 +5,7 @@ Contents:
 =========
 
 .. include:: ../README.rst
-    :start-line: 16
+    :start-line: 4
 
 .. toctree::
    :maxdepth: 2

@@ -5,10 +5,10 @@ Changelog
 Here's the recent changes to Ordered Set.
 
 .. changelog::
-    :version: dev
-    :released: Ongoing
+    :version: 1.0
+    :released: 2014-05-11
 
     .. change::
-        :tags: docs
+        :tags: general
 
-        Updated CHANGES.
+        First implementation.

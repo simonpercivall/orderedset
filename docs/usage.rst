@@ -4,4 +4,5 @@ Usage
 
 To use Ordered Set in a project::
 
-	import orderedset
+    from orderedset import OrderedSet
+

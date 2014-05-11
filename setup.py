@@ -1,8 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import sys
 import os
 import re
-from setuptools import setup, find_packages
+from setuptools import setup, find_packages, Extension
+from Cython.Build import cythonize
+
 
 readme = open('README.rst').read()
 history = open('HISTORY.rst').read().replace('.. :changelog:', '')
@@ -21,6 +24,15 @@ def read_version():
         raise ValueError("couldn't find version")
 
 
+extensions = cythonize(Extension('orderedset._orderedset',
+                                 ['lib/orderedset/_orderedset.pyx']))
+
+
+tests_require = []
+if sys.version_info < (2, 7):
+    tests_require.append("unittest2")
+
+
 # NB: _don't_ add namespace_packages to setup(), it'll break
 #     everything using imp.find_module
 setup(
@@ -33,6 +45,7 @@ setup(
     url='https://github.com/simonpercivall/orderedset',
     packages=find_packages('lib'),
     package_dir={'': 'lib'},
+    ext_modules=extensions,
     include_package_data=True,
     install_requires=read_reqs('requirements.txt'),
     license="BSD",
@@ -49,5 +62,6 @@ setup(
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.3',
     ],
+    tests_require=tests_require,
     test_suite='tests',
 )

@@ -15,16 +15,15 @@ clean: clean-build clean-pyc
 
 clean-build:
 	rm -fr build/
+	rm -fr lib/orderedset/*.so
+	rm -fr lib/orderedset/*.c
+	rm -fr lib/*.egg-info
 	rm -fr dist/
-	rm -fr *.egg-info
 
 clean-pyc:
 	find . -name '*.pyc' -exec rm -f {} +
 	find . -name '*.pyo' -exec rm -f {} +
 	find . -name '*~' -exec rm -f {} +
-
-clean-docs:
-	rm -f docs/orderedset*.rst
 
 lint:
 	flake8 lib/orderedset tests

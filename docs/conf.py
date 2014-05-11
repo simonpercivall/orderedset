@@ -28,7 +28,7 @@ project_root = os.path.dirname(cwd)
 # version is used.
 sys.path.insert(0, project_root)
 
-import orderedset
+import orderedset._orderedset
 
 # -- General configuration -----------------------------------------------------
 
@@ -41,6 +41,7 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.viewcode',
     'sphinx.ext.todo',
+    'sphinx.ext.intersphinx',
     'changelog',
 ]
 
@@ -264,3 +265,6 @@ texinfo_documents = [
 
 # If true, do not generate a @detailmenu in the "Top" node's menu.
 #texinfo_no_detailmenu = False
+
+
+intersphinx_mapping = {'python': ('http://docs.python.org/3.4', None)}

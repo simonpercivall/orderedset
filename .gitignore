@@ -3,6 +3,9 @@
 # C extensions
 *.so
 
+# Generated C source
+lib/orderedset/_orderedset.c
+
 # Packages
 *.egg
 *.egg-info
