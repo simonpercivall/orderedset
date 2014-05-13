@@ -4,7 +4,6 @@ import sys
 import os
 import re
 from setuptools import setup, find_packages, Extension
-from Cython.Build import cythonize
 
 
 readme = open('README.rst').read()
@@ -24,8 +23,14 @@ def read_version():
         raise ValueError("couldn't find version")
 
 
-extensions = cythonize(Extension('orderedset._orderedset',
-                                 ['lib/orderedset/_orderedset.pyx']))
+try:
+    from Cython.Build import cythonize
+    extensions = cythonize(Extension('orderedset._orderedset',
+                                     ['lib/orderedset/_orderedset.pyx']))
+except ImportError:
+    # couldn't import Cython, try with the .c file
+    extensions = [Extension('orderedset._orderedset',
+                            ['lib/orderedset/_orderedset.c'])]
 
 
 tests_require = []
