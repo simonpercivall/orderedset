@@ -5,6 +5,15 @@ Changelog
 Here's the recent changes to Ordered Set.
 
 .. changelog::
+    :version: 1.0.1
+    :released: 2014-05-13
+
+    ..change::
+        :tags: build
+
+        Don't require Cython to build an sdist.
+
+.. changelog::
     :version: 1.0
     :released: 2014-05-11
 
