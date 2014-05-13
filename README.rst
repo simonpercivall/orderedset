@@ -5,8 +5,8 @@ Ordered Set
 .. image:: https://badge.fury.io/py/orderedset.png
     :target: http://badge.fury.io/py/orderedset
 
-.. image:: https://travis-ci.org/<your github username>/orderedset.png?branch=master
-    :target: https://travis-ci.org/<your github username>/orderedset
+.. image:: https://travis-ci.org/simonpercivall/orderedset.png?branch=master
+    :target: https://travis-ci.org/simonpercivall/orderedset
 
 .. image:: https://pypip.in/d/orderedset/badge.png
     :target: https://crate.io/packages/orderedset?version=latest
