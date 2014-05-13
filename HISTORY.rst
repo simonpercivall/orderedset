@@ -5,10 +5,19 @@ Changelog
 Here's the recent changes to Ordered Set.
 
 .. changelog::
+    :version: 1.0.2
+    :released: 2014-05-14
+
+    .. change::
+        :tags: docs
+
+        Add proper attribution and licenses.
+
+.. changelog::
     :version: 1.0.1
     :released: 2014-05-13
 
-    ..change::
+    .. change::
         :tags: build
 
         Don't require Cython to build an sdist.
