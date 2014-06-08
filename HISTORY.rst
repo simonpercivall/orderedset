@@ -5,6 +5,15 @@ Changelog
 Here's the recent changes to Ordered Set.
 
 .. changelog::
+    :version: 1.1
+    :released: 2014-06-04
+
+    .. change::
+        :tags: general
+
+        Make OrderedSets handle slicing in __getitem__().
+
+.. changelog::
     :version: 1.0.2
     :released: 2014-05-14
 

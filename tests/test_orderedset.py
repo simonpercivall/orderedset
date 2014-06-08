@@ -213,6 +213,14 @@ class TestOrderedset(unittest.TestCase):
         oset = OrderedSet("abcd")
         self.assertEqual(oset[2], "c")
 
+    def test_getitem_slice(self):
+        oset = OrderedSet("abcdef")
+        self.assertEqual(oset[:2], OrderedSet("ab"))
+        self.assertEqual(oset[2:], OrderedSet("cdef"))
+        self.assertEqual(oset[::-1], OrderedSet("fedcba"))
+        self.assertEqual(oset[1:-1:2], OrderedSet("bd"))
+        self.assertEqual(oset[1::2], OrderedSet("bdf"))
+
     def test_len(self):
         oset = OrderedSet(self.lst)
         self.assertEqual(len(oset), len(self.lst))

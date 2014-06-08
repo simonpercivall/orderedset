@@ -1,7 +1,11 @@
 # cython: embedsignature=True
 from collections import Set, MutableSet, Iterable
 
-from cpython cimport PyDict_Contains
+from cpython cimport PyDict_Contains, PyIndex_Check
+
+
+cdef extern from "Python.h":
+    int PySlice_GetIndicesEx(slice, ssize_t length, ssize_t *start, ssize_t *stop, ssize_t *step, ssize_t *slicelength) except -1
 
 
 __all__ = ["OrderedSet"]
@@ -340,8 +344,41 @@ cdef class _OrderedSet(object):
             index += 1
         return index
 
-    def __getitem__(self, ssize_t index):
-        """Return the `elem` at `index`. Raises :class:`IndexError` if `index` is out of range."""
+    cdef _getslice(self, slice item):
+        cdef ssize_t start, stop, step, slicelength, place, i
+        cdef entry curr
+        cdef _OrderedSet result
+        PySlice_GetIndicesEx(item, len(self), &start, &stop, &step, &slicelength)
+
+        result = type(self)()
+        place = start
+        curr = self.end
+
+        if slicelength <= 0:
+            pass
+        elif step > 0:
+            # normal forward slice
+            i = 0
+            while slicelength > 0:
+                while i <= place:
+                    curr = curr.next
+                    i += 1
+                _add(result, curr.key)
+                place += step
+                slicelength -= 1
+        else:
+            # we're going backwards
+            i = len(self)
+            while slicelength > 0:
+                while i > place:
+                    curr = curr.prev
+                    i -= 1
+                _add(result, curr.key)
+                place += step
+                slicelength -= 1
+        return result
+
+    cdef _getindex(self, ssize_t index):
         cdef ssize_t _len = len(self)
         if index >= _len or (index < 0 and abs(index) > _len):
             raise IndexError("list index out of range")
@@ -359,6 +396,14 @@ cdef class _OrderedSet(object):
                 curr = curr.prev
                 index -= 1
         return curr.key
+
+    def __getitem__(self, item):
+        """Return the `elem` at `index`. Raises :class:`IndexError` if `index` is out of range."""
+        if isinstance(item, slice):
+            return self._getslice(item)
+        if not PyIndex_Check(item):
+            raise TypeError("%s indices must be integers, not %s" % (type(self).__name__, type(item)))
+        return self._getindex(item)
 
     ##
     # sequence methods
