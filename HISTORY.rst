@@ -5,6 +5,15 @@ Changelog
 Here's the recent changes to Ordered Set.
 
 .. changelog::
+    :version: 1.1.1
+    :released: 2014-08-24
+
+    .. change::
+        :tags: general
+
+        Add pickle/copy support to OrderedSet.
+
+.. changelog::
     :version: 1.1
     :released: 2014-06-04
 
