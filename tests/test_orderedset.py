@@ -15,6 +15,8 @@ else:
     import unittest
 import weakref
 import gc
+import copy
+import pickle
 
 from orderedset import *
 
@@ -95,6 +97,17 @@ class TestOrderedset(unittest.TestCase):
 
         oset1.clear()
         self.assertNotEqual(oset1, oset2)
+
+    def test_reduce(self):
+        oset = OrderedSet(self.lst)
+        oset2 = copy.copy(oset)
+        self.assertEqual(oset, oset2)
+
+        oset3 = pickle.loads(pickle.dumps(oset))
+        self.assertEqual(oset, oset3)
+
+        oset.add(-1)
+        self.assertNotEqual(oset, oset2)
 
     def test_difference_and_update(self):
         oset1 = OrderedSet([1, 2, 3])

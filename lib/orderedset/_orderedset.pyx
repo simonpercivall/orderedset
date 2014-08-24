@@ -420,6 +420,11 @@ cdef class _OrderedSet(object):
     def __reversed__(self):
         return OrderedSetReverseIterator(self)
 
+    def __reduce__(self):
+        items = list(self)
+        inst_dict = vars(self).copy()
+        return self.__class__, (items, ), inst_dict
+
 
 class OrderedSet(_OrderedSet, MutableSet):
     """
