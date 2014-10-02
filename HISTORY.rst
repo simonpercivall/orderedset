@@ -5,6 +5,16 @@ Changelog
 Here's the recent changes to Ordered Set.
 
 .. changelog::
+    :version: 1.1.2
+    :released: 2014-10-02
+
+    .. change::
+        :tags: general
+
+        Make comparisons work with sets and lists,
+        and not crash when compared with None.
+
+.. changelog::
     :version: 1.1.1
     :released: 2014-08-24
 
