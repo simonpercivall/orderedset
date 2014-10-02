@@ -1,6 +1,7 @@
 # cython: embedsignature=True
 from collections import Set, MutableSet, Iterable
 
+
 from cpython cimport PyDict_Contains, PyIndex_Check
 
 
@@ -441,24 +442,40 @@ class OrderedSet(_OrderedSet, MutableSet):
         return '%s(%r)' % (self.__class__.__name__, list(self))
 
     def __eq__(self, other):
-        cdef _OrderedSet _self = self
-        cdef _OrderedSet _other
-
         if isinstance(other, _OrderedSet):
-            _other = other
-            return len(_self.map) == len(_other.map) and list(_self) == list(_other)
-        return set(self) == set(other)
+            return len(self) == len(other) and list(self) == list(other)
+        elif isinstance(other, Set):
+            return set(self) == set(other)
+        elif isinstance(other, list):
+            return list(self) == list(other)
+        return NotImplemented
 
     def __le__(self, other):
-        if not isinstance(other, Set):
-            return NotImplemented
-        if len(self) > len(other):
-            return False
-
         if isinstance(other, _OrderedSet):
-            return list(self) <= list(other)
-        else:
-            for elem in self:
-                if elem not in other:
-                    return False
-            return True
+            return len(self) <= len(other) and list(self) <= list(other)
+        elif isinstance(other, Set):
+            return len(self) <= len(other) and set(self) <= set(other)
+        elif isinstance(other, list):
+            return len(self) <= len(other) and list(self) <= list(other)
+        return NotImplemented
+
+    def __lt__(self, other):
+        if isinstance(other, _OrderedSet):
+            return len(self) < len(other) and list(self) < list(other)
+        elif isinstance(other, Set):
+            return len(self) < len(other) and set(self) < set(other)
+        elif isinstance(other, list):
+            return len(self) < len(other) and list(self) < list(other)
+        return NotImplemented
+
+    def __ge__(self, other):
+        ret = self < other
+        if ret is NotImplemented:
+            return ret
+        return not ret
+
+    def __gt__(self, other):
+        ret = self <= other
+        if ret is NotImplemented:
+            return ret
+        return not ret

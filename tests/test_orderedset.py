@@ -278,7 +278,36 @@ class TestOrderedset(unittest.TestCase):
         oset1 = OrderedSet(self.lst)
         oset2 = OrderedSet(self.lst)
 
+        self.assertNotEqual(oset1, None)
+
         self.assertEqual(oset1, oset2)
+        self.assertEqual(oset1, set(self.lst))
+        self.assertEqual(oset1, list(self.lst))
+
+    def test_ordering(self):
+        oset1 = OrderedSet(self.lst)
+        oset2 = OrderedSet(self.lst)
+
+        if sys.version_info < (3, 0):
+            self.assertFalse(oset1 <= None)
+
+        self.assertLessEqual(oset2, oset1)
+        self.assertLessEqual(oset2, set(oset1))
+        self.assertLessEqual(oset2, list(oset1))
+
+        self.assertGreaterEqual(oset1, oset2)
+        self.assertGreaterEqual(oset1, set(oset2))
+        self.assertGreaterEqual(oset1, list(oset2))
+
+        oset3 = OrderedSet(self.lst[:-1])
+
+        self.assertLess(oset3, oset1)
+        self.assertLess(oset3, set(oset1))
+        self.assertLess(oset3, list(oset1))
+
+        self.assertGreater(oset1, oset3)
+        self.assertGreater(oset1, set(oset3))
+        self.assertGreater(oset1, list(oset3))
 
 
 if __name__ == '__main__':
