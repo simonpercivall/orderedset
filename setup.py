@@ -51,7 +51,7 @@ setup(
     packages=find_packages('lib'),
     package_dir={'': 'lib'},
     ext_modules=extensions,
-    include_package_data=True,
+    include_package_data=False,
     install_requires=read_reqs('requirements.txt'),
     license="BSD",
     zip_safe=False,
