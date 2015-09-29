@@ -1,60 +1,32 @@
-=========
 Changelog
 =========
 
-Here's the recent changes to Ordered Set.
+1.1.2 - 2014-10-02
+~~~~~~~~~~~~~~~~~~
 
-.. changelog::
-    :version: 1.1.2
-    :released: 2014-10-02
+* Make comparisons work with sets and lists, and not crash when compared with None.
 
-    .. change::
-        :tags: general
+1.1.1 - 2014-08-24
+~~~~~~~~~~~~~~~~~~
 
-        Make comparisons work with sets and lists,
-        and not crash when compared with None.
+* Add pickle/copy support to OrderedSet
 
-.. changelog::
-    :version: 1.1.1
-    :released: 2014-08-24
+1.1 - 2014-06-04
+~~~~~~~~~~~~~~~~
 
-    .. change::
-        :tags: general
+* Make OrderedSets handle slicing in __getitem__().
 
-        Add pickle/copy support to OrderedSet.
+1.0.2 - 2014-05-14
+~~~~~~~~~~~~~~~~~~
 
-.. changelog::
-    :version: 1.1
-    :released: 2014-06-04
+* Add proper attribution and licenses.
 
-    .. change::
-        :tags: general
+1.0.1 - 2014-05-13
+~~~~~~~~~~~~~~~~~~
 
-        Make OrderedSets handle slicing in __getitem__().
+* Don't require Cython to build an sdist.
 
-.. changelog::
-    :version: 1.0.2
-    :released: 2014-05-14
+1.0 - 2014-05-11
+~~~~~~~~~~~~~~~~
 
-    .. change::
-        :tags: docs
-
-        Add proper attribution and licenses.
-
-.. changelog::
-    :version: 1.0.1
-    :released: 2014-05-13
-
-    .. change::
-        :tags: build
-
-        Don't require Cython to build an sdist.
-
-.. changelog::
-    :version: 1.0
-    :released: 2014-05-11
-
-    .. change::
-        :tags: general
-
-        First implementation.
+* First implementation.
