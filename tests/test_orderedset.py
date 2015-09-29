@@ -226,8 +226,8 @@ class TestOrderedset(unittest.TestCase):
         self.assertEqual([1, 2] | OrderedSet([3, 1, 2, 4]), OrderedSet([1, 2, 3, 4]))
 
         # union with unordered set should work, though the order will be arbitrary
-        self.assertEqual(oset1  | {2}, OrderedSet([1, 2]))
-        self.assertEqual({2} | oset1, OrderedSet([2, 1]))
+        self.assertEqual(oset1  | set([2]), OrderedSet([1, 2]))
+        self.assertEqual(set([2]) | oset1, OrderedSet([2, 1]))
 
     def test_symmetric_difference_with_iterable(self):
         oset1 = OrderedSet([1])
@@ -238,8 +238,8 @@ class TestOrderedset(unittest.TestCase):
         self.assertEqual(OrderedSet([3, 1, 4, 2]) ^ [3, 4], OrderedSet([1, 2]))
         self.assertEqual([3, 1, 4, 2] ^ OrderedSet([3, 4]), OrderedSet([1, 2]))
 
-        self.assertEqual(OrderedSet([3, 1, 4, 2]) ^ {3, 4}, OrderedSet([1, 2]))
-        self.assertEqual({3, 1, 4} ^ OrderedSet([3, 4, 2]), OrderedSet([1, 2]))
+        self.assertEqual(OrderedSet([3, 1, 4, 2]) ^ set([3, 4]), OrderedSet([1, 2]))
+        self.assertEqual(set([3, 1, 4]) ^ OrderedSet([3, 4, 2]), OrderedSet([1, 2]))
 
     def test_intersection_with_iterable(self):
         self.assertEqual([1, 2, 3] & OrderedSet([3, 2]), OrderedSet([2, 3]))
