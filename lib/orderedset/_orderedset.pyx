@@ -190,12 +190,16 @@ cdef class _OrderedSet(object):
         """
         :rtype: OrderedSet
         """
+        ostyp = type(self if isinstance(self, OrderedSet) else other)
+
+        if not isinstance(self, Iterable):
+            return NotImplemented
         if not isinstance(other, Set):
             if not isinstance(other, Iterable):
                 return NotImplemented
-            other = self._from_iterable(other)
-        return self._from_iterable(value for value in self
-                                   if value not in other)
+            other = ostyp._from_iterable(other)
+
+        return ostyp._from_iterable(value for value in self if value not in other)
 
     def __isub__(self, other):
         if other is self:
@@ -224,9 +228,16 @@ cdef class _OrderedSet(object):
         """
         :rtype: OrderedSet
         """
-        if not isinstance(other, Iterable):
+        ostyp = type(self if isinstance(self, OrderedSet) else other)
+
+        if not isinstance(self, Iterable):
             return NotImplemented
-        return self._from_iterable(value for value in other if value in self)
+        if not isinstance(other, Set):
+            if not isinstance(other, Iterable):
+                return NotImplemented
+            other = ostyp._from_iterable(other)
+
+        return ostyp._from_iterable(value for value in self if value in other)
 
     def __iand__(self, it):
         for value in (self - it):
@@ -282,10 +293,11 @@ cdef class _OrderedSet(object):
         """
         :rtype: OrderedSet
         """
-        if not isinstance(other, Set):
-            if isinstance(other, Iterable):
-                return NotImplemented
-            other = self._from_iterable(other)
+        if not isinstance(self, Iterable):
+            return NotImplemented
+        if not isinstance(other, Iterable):
+            return NotImplemented
+
         return (self - other) | (other - self)
 
     def __ixor__(self, other):
@@ -320,11 +332,14 @@ cdef class _OrderedSet(object):
         """
         :rtype: OrderedSet
         """
+        ostyp = type(self if isinstance(self, OrderedSet) else other)
+
+        if not isinstance(self, Iterable):
+            return NotImplemented
         if not isinstance(other, Iterable):
             return NotImplemented
         chain = (e for s in (self, other) for e in s)
-        return self._from_iterable(chain)
-
+        return ostyp._from_iterable(chain)
 
     def __ior__(self, other):
         for elem in other:

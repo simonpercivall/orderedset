@@ -218,6 +218,37 @@ class TestOrderedset(unittest.TestCase):
         oset1.update("abc")
         self.assertEqual(oset1, oset2 | "abc")
 
+    def test_union_with_iterable(self):
+        oset1  = OrderedSet([1])
+
+        self.assertEqual(oset1  | [2, 1], OrderedSet([1, 2]))
+        self.assertEqual([2] | oset1, OrderedSet([2, 1]))
+        self.assertEqual([1, 2] | OrderedSet([3, 1, 2, 4]), OrderedSet([1, 2, 3, 4]))
+
+        # union with unordered set should work, though the order will be arbitrary
+        self.assertEqual(oset1  | {2}, OrderedSet([1, 2]))
+        self.assertEqual({2} | oset1, OrderedSet([2, 1]))
+
+    def test_symmetric_difference_with_iterable(self):
+        oset1 = OrderedSet([1])
+
+        self.assertEqual(oset1 ^ [1], OrderedSet([]))
+        self.assertEqual([1] ^ oset1, OrderedSet([]))
+
+        self.assertEqual(OrderedSet([3, 1, 4, 2]) ^ [3, 4], OrderedSet([1, 2]))
+        self.assertEqual([3, 1, 4, 2] ^ OrderedSet([3, 4]), OrderedSet([1, 2]))
+
+        self.assertEqual(OrderedSet([3, 1, 4, 2]) ^ {3, 4}, OrderedSet([1, 2]))
+        self.assertEqual({3, 1, 4} ^ OrderedSet([3, 4, 2]), OrderedSet([1, 2]))
+
+    def test_intersection_with_iterable(self):
+        self.assertEqual([1, 2, 3] & OrderedSet([3, 2]), OrderedSet([2, 3]))
+        self.assertEqual(OrderedSet([3, 2] & OrderedSet([1, 2, 3])), OrderedSet([3, 2]))
+
+    def test_difference_with_iterable(self):
+        self.assertEqual(OrderedSet([1, 2, 3, 4]) - [3, 2], OrderedSet([1, 4]))
+        self.assertEqual([3, 2, 4, 1] - OrderedSet([2, 4]), OrderedSet([3, 1]))
+
     def test_index(self):
         oset = OrderedSet("abcd")
         self.assertEqual(oset.index("b"), 1)

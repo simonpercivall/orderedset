@@ -1,6 +1,14 @@
 Changelog
 =========
 
+1.2 - 2015-09-29
+~~~~~~~~~~~~~~~~
+
+* bugfix: Set operations only worked with iterables if the OrderedSet was on the
+  left-hand side. They now work both ways.
+* bugfix: The order of an intersection was the right-hand side's order. It is now
+  fixed to be the left-hand side's order.
+
 1.1.2 - 2014-10-02
 ~~~~~~~~~~~~~~~~~~
 
