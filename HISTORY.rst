@@ -1,6 +1,16 @@
 Changelog
 =========
 
+2.0 - 2016-02-02
+~~~~~~~~~~~~~~~~
+
+* breaking change: All comparisons, other than `eq`, against other ordered sets
+  are now performed unordered; i.e., they are treated as regular sets.
+* `isorderedsubset` and `isorderedsuperset` have been added to perform ordered
+  comparisons against other sequences. Using these methods with unordered
+  collections wield yield arbitrary (and depending on Python implementation,
+  unstable) results.
+
 1.2 - 2015-09-29
 ~~~~~~~~~~~~~~~~
 
