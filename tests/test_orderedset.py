@@ -159,6 +159,10 @@ class TestOrderedset(unittest.TestCase):
         self.assertFalse(oset2.issubset(oset1))
         self.assertTrue(oset1 < oset2)
 
+        # issubset compares underordered for all sets
+        oset2 = OrderedSet([4, 3, 2, 1])
+        self.assertTrue(oset1 < oset2)
+
     def test_issuperset(self):
         oset1 = OrderedSet([1, 2, 3])
         oset2 = OrderedSet([1, 2])
@@ -175,6 +179,28 @@ class TestOrderedset(unittest.TestCase):
         self.assertFalse(oset1 > oset2)
         self.assertFalse(oset1.issuperset(oset2))
         self.assertTrue(oset2 > oset1)
+
+        # issubset compares underordered for all sets
+        oset2 = OrderedSet([4, 3, 2, 1])
+        self.assertTrue(oset2 > oset1)
+
+    def test_orderedsubset(self):
+        oset1 = OrderedSet([1, 2, 3])
+        oset2 = OrderedSet([1, 2, 3, 4])
+        oset3 = OrderedSet([1, 2, 4, 3])
+
+        self.assertTrue(oset1.isorderedsubset(oset2))
+        self.assertFalse(oset1.isorderedsubset(oset3))
+        self.assertFalse(oset2.isorderedsubset(oset3))
+
+    def test_orderedsuperset(self):
+        oset1 = OrderedSet([1, 2, 3])
+        oset2 = OrderedSet([1, 2, 3, 4])
+        oset3 = OrderedSet([1, 2, 4, 3])
+
+        self.assertTrue(oset2.isorderedsuperset(oset1))
+        self.assertFalse(oset3.isorderedsuperset(oset1))
+        self.assertFalse(oset3.isorderedsuperset(oset2))
 
     def test_symmetric_difference_and_update(self):
         oset1 = OrderedSet([1, 2, 3])

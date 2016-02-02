@@ -1,6 +1,11 @@
 # cython: embedsignature=True
+import sys
 from collections import Set, MutableSet, Iterable
 
+if sys.version_info[0] == 2:
+    from itertools import izip
+else:
+    izip = zip
 
 from cpython cimport PyDict_Contains, PyIndex_Check
 
@@ -39,6 +44,15 @@ cdef void _discard(_OrderedSet oset, object key):
         _entry.prev.next = _entry.next
         _entry.next.prev = _entry.prev
         oset.os_used -= 1
+
+
+cdef inline object  _isorderedsubset(seq1, seq2):
+    if not len(seq1) <= len(seq2):
+            return False
+    for self_elem, other_elem in izip(seq1, seq2):
+        if not self_elem == other_elem:
+            return False
+    return True
 
 
 cdef class OrderedSetIterator(object):
@@ -274,6 +288,12 @@ cdef class _OrderedSet(object):
         """
         return other <= self
 
+    def isorderedsubset(self, other):
+        return _isorderedsubset(self, other)
+
+    def isorderedsuperset(self, other):
+        return _isorderedsubset(other, self)
+
     def symmetric_difference(self, other):
         """``OrderedSet ^ other``
 
@@ -457,27 +477,21 @@ class OrderedSet(_OrderedSet, MutableSet):
         return '%s(%r)' % (self.__class__.__name__, list(self))
 
     def __eq__(self, other):
-        if isinstance(other, _OrderedSet):
+        if isinstance(other, (_OrderedSet, list)):
             return len(self) == len(other) and list(self) == list(other)
         elif isinstance(other, Set):
             return set(self) == set(other)
-        elif isinstance(other, list):
-            return list(self) == list(other)
         return NotImplemented
 
     def __le__(self, other):
-        if isinstance(other, _OrderedSet):
-            return len(self) <= len(other) and list(self) <= list(other)
-        elif isinstance(other, Set):
+        if isinstance(other, Set):
             return len(self) <= len(other) and set(self) <= set(other)
         elif isinstance(other, list):
             return len(self) <= len(other) and list(self) <= list(other)
         return NotImplemented
 
     def __lt__(self, other):
-        if isinstance(other, _OrderedSet):
-            return len(self) < len(other) and list(self) < list(other)
-        elif isinstance(other, Set):
+        if isinstance(other, Set):
             return len(self) < len(other) and set(self) < set(other)
         elif isinstance(other, list):
             return len(self) < len(other) and list(self) < list(other)
