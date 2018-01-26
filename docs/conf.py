@@ -266,4 +266,4 @@ texinfo_documents = [
 #texinfo_no_detailmenu = False
 
 
-intersphinx_mapping = {'python': ('http://docs.python.org/3.4', None)}
+intersphinx_mapping = {'python': ('http://docs.python.org/3.6', None)}
