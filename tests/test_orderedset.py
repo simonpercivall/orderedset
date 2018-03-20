@@ -275,6 +275,11 @@ class TestOrderedset(unittest.TestCase):
         self.assertEqual(OrderedSet([1, 2, 3, 4]) - [3, 2], OrderedSet([1, 4]))
         self.assertEqual([3, 2, 4, 1] - OrderedSet([2, 4]), OrderedSet([3, 1]))
 
+    def test_isdisjoint(self):
+        self.assertTrue(OrderedSet().isdisjoint(OrderedSet()))
+        self.assertTrue(OrderedSet([1]).isdisjoint(OrderedSet([2])))
+        self.assertFalse(OrderedSet([1, 2]).isdisjoint(OrderedSet([2, 3])))
+
     def test_index(self):
         oset = OrderedSet("abcd")
         self.assertEqual(oset.index("b"), 1)
