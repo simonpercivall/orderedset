@@ -14,7 +14,9 @@ Ordered Set
 
 An Ordered Set implementation in Cython. Based on `Raymond Hettinger's OrderedSet recipe`_.
 
-Example::
+Example:
+
+.. code-block:: python
 
     >>> from orderedset import OrderedSet
     >>> oset = OrderedSet([1, 2, 3])
