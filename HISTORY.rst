@@ -1,6 +1,14 @@
 Changelog
 =========
 
+2.0.1 - 2018-03-20
+~~~~~~~~~~~~~~~~~~
+
+* bugfix: Fix `isdisjoint` to return True when the sets are disjoint
+* build: Include 3.6 when testing
+* dist: Include test files in sdist
+* docs: Make the Readme a bit prettier
+
 2.0 - 2016-02-02
 ~~~~~~~~~~~~~~~~
 
