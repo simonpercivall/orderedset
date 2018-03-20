@@ -268,6 +268,7 @@ cdef class _OrderedSet(object):
         for value in other:
             if value in self:
                 return False
+        return True
 
     def issubset(self, other):
         """``OrderedSet <= other``
