@@ -1,11 +1,12 @@
 # cython: embedsignature=True
 import sys
-from collections import Set, MutableSet, Iterable
 
 if sys.version_info[0] == 2:
     from itertools import izip
+    from collections import Set, MutableSet, Iterable
 else:
     izip = zip
+    from collections.abc import Set, MutableSet, Iterable
 
 from cpython cimport PyDict_Contains, PyIndex_Check
 
