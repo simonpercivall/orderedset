@@ -34,7 +34,7 @@ Features
 * Works like a regular set, but remembers insertion order;
 * Is approximately 5 times faster than the pure Python implementation overall
   (and 5 times slower than `set`);
-* Compatible with Python 2.6 through 3.6.;
+* Compatible with Python 2.7 through 3.8;
 * Supports the full set interface;
 * Supports some list methods, like `index` and `__getitem__`.
 * Supports set methods against iterables.
