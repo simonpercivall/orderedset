@@ -1,6 +1,11 @@
 Changelog
 =========
 
+2.0.2 - 2020-02-25
+~~~~~~~~~~~~~~~~~~
+
+* bugfix: Fix deprecation warning for collections.abc in Python 3.8+
+
 2.0.1 - 2018-03-20
 ~~~~~~~~~~~~~~~~~~
 
