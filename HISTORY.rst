@@ -1,6 +1,11 @@
 Changelog
 =========
 
+2.0.3 - 2020-02-26
+~~~~~~~~~~~~~~~~~~
+
+* bugfix: Generate new C file to fix compile issues
+
 2.0.2 - 2020-02-25
 ~~~~~~~~~~~~~~~~~~
 
